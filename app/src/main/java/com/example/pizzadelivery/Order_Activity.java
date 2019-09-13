@@ -8,8 +8,13 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Order_Activity extends AppCompatActivity {
     TextView basepriceView,toppings_total,toppingList,deliveryCost,totalCost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +26,21 @@ public class Order_Activity extends AppCompatActivity {
         deliveryCost=(TextView)findViewById(R.id.deliverycostView);
         totalCost=(TextView)findViewById(R.id.totalView);
 
+
+
         if(getIntent()!=null && getIntent().getExtras()!=null){
             Order order= (Order) getIntent().getExtras().getSerializable(MainActivity.REQ_CODE);
+
+            String alltopping_list= Arrays.toString(order.toppings.toArray()).replace("[","").replace("]","");
+
             basepriceView.setText(order.baseprice.toString());
             toppings_total.setText(order.toppingsprice.toString());
-            toppingList.setText(order.toppings.toString());
+            toppingList.setText(alltopping_list);
             deliveryCost.setText(order.deliverycost.toString());
             totalCost.setText(order.totalCost.toString());
 
+
         }
-       // Order order=(Order) getIntent().getSerializableExtra("orderintent");
-        //baseprice.setText(order.getBaseprice().toString());
 
     }
 }

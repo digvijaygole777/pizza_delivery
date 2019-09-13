@@ -104,10 +104,12 @@ public class MainActivity extends AppCompatActivity {
                                     if (linearLayout2.getChildCount() < 5) {
                                         imageView.setImageResource(images[which]);
                                         linearLayout2.addView(imageView);
+                                       imageView.setLayoutParams(new LinearLayout.LayoutParams(150,150,300));
                                         progressBar.setProgress(progress);
                                     } else if (linearlayout.getChildCount() < 5) {
                                         imageView.setImageResource(images[which]);
                                         linearlayout.addView(imageView);
+                                        imageView.setLayoutParams(new LinearLayout.LayoutParams(150,150,300));
                                         progressBar.setProgress(progress);
                                     }
                                   toppings_list.add(items[which]);
