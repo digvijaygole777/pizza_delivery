@@ -97,18 +97,44 @@ public class MainActivity extends AppCompatActivity {
                     builder.setTitle("Choose a Topping")
                             .setItems(items, new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                                public void onClick(DialogInterface dialog, final int which) {
                                     progress += 10;
 
-                                    ImageView imageView = new ImageView(linearlayout.getContext());
+                                    final ImageView imageView = new ImageView(linearlayout.getContext());
                                     if (linearLayout2.getChildCount() < 5) {
+                                        imageView.setTag(linearLayout2.getChildCount());
+
                                         imageView.setImageResource(images[which]);
                                         linearLayout2.addView(imageView);
                                        imageView.setLayoutParams(new LinearLayout.LayoutParams(150,150,300));
+
+                                       imageView.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               // Log.i("Tag",v.getTag().toString());
+                                               linearLayout2.removeView(imageView);
+                                               progress=progress-10;
+                                               progressBar.setProgress(progress);
+                                               topping_price=topping_price-1.5;
+                                           }
+                                       });
+
                                         progressBar.setProgress(progress);
-                                    } else if (linearlayout.getChildCount() < 5) {
+                                    }
+                                    else if (linearlayout.getChildCount() < 5) {
                                         imageView.setImageResource(images[which]);
+                                        imageView.setTag(linearlayout.getChildCount()+5);
                                         linearlayout.addView(imageView);
+                                        imageView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                // Log.i("Tag",v.getTag().toString());
+                                                linearlayout.removeView(imageView);
+                                                progress=progress-10;
+                                                progressBar.setProgress(progress);
+                                                topping_price=topping_price-1.5;
+                                            }
+                                        });
                                         imageView.setLayoutParams(new LinearLayout.LayoutParams(150,150,300));
                                         progressBar.setProgress(progress);
                                     }
